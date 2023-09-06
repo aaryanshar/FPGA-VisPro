@@ -1,0 +1,25 @@
+% Load the image into a byte array
+imageData = imread('img.jpg');
+[height, width, ~] = size(imageData);
+
+% Reshape the image data into a 1D array
+byteArray = reshape(imageData, 1, []);
+
+% Convert the byte array to a binary representation
+binaryString = dec2bin(byteArray, 8); % 8 specifies the number of bits per byte
+
+% Specify the output file name
+outputFileName = 'binary_representation.bin'; % Use .txt extension for a text file
+
+% Open the file for writing
+fileID = fopen(outputFileName, 'w');
+
+% Write each character of the binary representation on a separate line
+for i = 1:length(binaryString)
+    fprintf(fileID, '%s\n', binaryString(i));
+end
+
+% Close the file
+fclose(fileID);
+
+disp(['Binary representation written to ' outputFileName]);
